@@ -2,19 +2,20 @@ import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jsonplaceholder_likes/components/auth/presentation/cubit/auth_cubit.dart';
+import 'package:jsonplaceholder_likes/core/helpers/snackbar_helper.dart';
 
 class SignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
+        // Mostrar diferentes snackbars dependiendo del estado
         if (state is Authenticated) {
-          FlushbarHelper.createSuccess(
-            message: 'Bienvenido ${state.user.name}',
-          ).show(context);
+          SnackbarHelper.successSnackbar('Bienvenido ${state.user.name}')
+              .show(context);
         }
         if (state is AuthenticationError) {
-          FlushbarHelper.createError(message: state.message).show(context);
+          SnackbarHelper.failureSnackbar(state.message).show(context);
         }
       },
       builder: (context, state) {

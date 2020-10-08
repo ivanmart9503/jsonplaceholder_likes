@@ -44,6 +44,8 @@ class PhotoLikes extends StatelessWidget {
     );
   }
 
+  /// Dependiendo si el usuario ya ha dado like o no, se ejecutan diferentes funciones,
+  /// además el icono cambia junto con el color
   Widget _likeDislikeIcon(BuildContext context, List<dynamic> usersId) {
     final userId = (context.bloc<AuthCubit>().state as Authenticated).user.id;
     final like = usersId.contains(userId);
@@ -53,10 +55,8 @@ class PhotoLikes extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (like) {
-          print('dislike');
           context.bloc<LikesCubit>().dislikePhoto(_photo.id, userId);
         } else {
-          print('like');
           context.bloc<LikesCubit>().likePhoto(_photo.id, userId);
         }
       },

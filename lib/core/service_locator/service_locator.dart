@@ -13,6 +13,7 @@ import 'package:jsonplaceholder_likes/components/photos/presentation/cubit/photo
 
 final getIt = GetIt.I;
 
+/// Inicialización de inyección de dependencias
 void initServiceLocator() {
   // Blocs
   getIt.registerFactory<AuthCubit>(

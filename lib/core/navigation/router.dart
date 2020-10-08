@@ -2,6 +2,7 @@ import 'package:jsonplaceholder_likes/components/auth/presentation/pages/sign_in
 import 'package:jsonplaceholder_likes/components/photos/presentation/pages/photos_page.dart';
 import 'package:sailor/sailor.dart';
 
+/// Generación de rutas para la navegación
 class Router {
   static final sailor = Sailor();
 

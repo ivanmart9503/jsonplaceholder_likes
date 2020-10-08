@@ -8,6 +8,7 @@ import 'package:jsonplaceholder_likes/components/photos/domain/repositories/like
 
 part 'likes_state.dart';
 
+/// Cubit o BLoC para manejar el estado de likes de cada foto
 class LikesCubit extends Cubit<LikesState> {
   final Photo photo;
   final ILikesRepository _repository;
@@ -15,6 +16,7 @@ class LikesCubit extends Cubit<LikesState> {
 
   LikesCubit(this.photo, this._repository) : super(LikesInitial());
 
+  /// Suscripción al stream que "escucha" los cambios en los likes
   void loadLikes() {
     _likesSubscription?.cancel();
     _likesSubscription = _repository.watch(photo.id).listen((likes) {
@@ -22,10 +24,12 @@ class LikesCubit extends Cubit<LikesState> {
     });
   }
 
+  /// Método para dar like a una foto
   void likePhoto(int photoId, String userId) async {
     await _repository.likePhoto(photoId, userId);
   }
 
+  /// Método para dar dislike a una foto
   void dislikePhoto(int photoId, String userId) async {
     await _repository.dislikePhoto(photoId, userId);
   }

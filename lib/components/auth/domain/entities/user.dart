@@ -8,13 +8,8 @@ class User extends Equatable {
     @required this.photo,
   });
 
-  /// Id único que viene de la autenticación con google
   final String id;
-
-  /// El nombre del usuario
   final String name;
-
-  /// Url de la foto de perfil
   final String photo;
 
   @override

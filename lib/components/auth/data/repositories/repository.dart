@@ -6,16 +6,20 @@ import 'package:jsonplaceholder_likes/components/auth/domain/repositories/reposi
 import 'package:jsonplaceholder_likes/core/errors/failures.dart';
 import 'package:jsonplaceholder_likes/core/extensions/firebase_user_mapper.dart';
 
+/// Implementación de la interfaz del repositorio de autenticación
 class AuthRepository implements IAuthRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
 
   AuthRepository(this._firebaseAuth, this._googleSignIn);
 
+  /// Obtener el último usuario logueado,
+  /// puede ser nulo
   @override
   Future<Option<User>> getSignedInUSer() async =>
       optionOf(_firebaseAuth.currentUser?.toNormalUser());
 
+  /// Iniciar sesión en Firebase con las credenciales de Google
   @override
   Future<Either<Failure, User>> signInWithGoogle() async {
     try {
@@ -39,6 +43,7 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
+  /// Cerrar sesión en Firebase y en Google
   @override
   Future<void> signOut() {
     return Future.wait([
