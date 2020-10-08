@@ -11,13 +11,27 @@ class LikesRepository implements ILikesRepository {
     return _photos.doc(photoId.toString()).snapshots().map((snapshot) {
       if (snapshot.exists) {
         final Map<String, dynamic> data = snapshot.data();
-        final List<dynamic> users = data['likes'];
-        final int likes = users.length;
+        final List<dynamic> usersId = data['likes'];
+        final int likes = usersId.length;
 
-        return LikesModel(numberOfLikes: likes, users: users);
+        return LikesModel(numberOfLikes: likes, usersId: usersId);
       } else {
-        return LikesModel(numberOfLikes: 0, users: [{}]);
+        return LikesModel(numberOfLikes: 0, usersId: []);
       }
+    });
+  }
+
+  @override
+  Future<void> likePhoto(int photoId, String userId) {
+    return _photos.doc(photoId.toString()).set({
+      'likes': FieldValue.arrayUnion([userId])
+    }, SetOptions(merge: true));
+  }
+
+  @override
+  Future<void> dislikePhoto(int photoId, String userId) {
+    return _photos.doc(photoId.toString()).update({
+      'likes': FieldValue.arrayRemove([userId])
     });
   }
 }

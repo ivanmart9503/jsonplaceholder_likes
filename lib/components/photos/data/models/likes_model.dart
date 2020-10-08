@@ -4,27 +4,27 @@ import 'package:jsonplaceholder_likes/components/photos/domain/entities/likes.da
 class LikesModel extends Likes {
   LikesModel({
     @required int numberOfLikes,
-    @required List<dynamic> users,
-  }) : super(numberOfLikes: numberOfLikes, users: users);
+    @required List<dynamic> usersId,
+  }) : super(numberOfLikes: numberOfLikes, usersId: usersId);
 
   factory LikesModel.fromJson(Map<String, dynamic> json) {
     return LikesModel(
       numberOfLikes: json['numberOfLikes'] ?? 0,
-      users: json['users'] ?? [],
+      usersId: json['users'] ?? [],
     );
   }
 
   Map<String, dynamic> toJson(LikesModel photo) {
     return {
       "numberOfLikes": numberOfLikes,
-      "users": users,
+      "users": usersId,
     };
   }
 
   factory LikesModel.fromSuper(Likes likes) {
     return LikesModel(
       numberOfLikes: likes.numberOfLikes,
-      users: likes.users,
+      usersId: likes.usersId,
     );
   }
 }

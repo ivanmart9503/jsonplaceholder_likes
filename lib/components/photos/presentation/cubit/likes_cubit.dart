@@ -22,6 +22,14 @@ class LikesCubit extends Cubit<LikesState> {
     });
   }
 
+  void likePhoto(int photoId, String userId) async {
+    await _repository.likePhoto(photoId, userId);
+  }
+
+  void dislikePhoto(int photoId, String userId) async {
+    await _repository.dislikePhoto(photoId, userId);
+  }
+
   @override
   Future<void> close() {
     _likesSubscription.cancel();

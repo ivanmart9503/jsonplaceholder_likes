@@ -13,7 +13,21 @@ class PhotosPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
-          title: Text('Photos'),
+          backgroundColor: Colors.grey[100],
+          brightness: Brightness.light,
+          iconTheme: IconThemeData(color: Colors.black),
+          leading: Padding(
+            padding: EdgeInsets.all(10),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(
+                (context.bloc<AuthCubit>().state as Authenticated).user.photo,
+              ),
+            ),
+          ),
+          title: Text(
+            '{JSON} Placeholder',
+            style: TextStyle(color: Colors.black),
+          ),
           actions: [
             IconButton(
               icon: Icon(Icons.exit_to_app),

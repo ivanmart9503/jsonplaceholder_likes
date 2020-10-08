@@ -22,15 +22,19 @@ class SignInButton extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         } else {
           return Center(
-            child: RaisedButton(
+            child: RaisedButton.icon(
+              icon: Image.asset(
+                'assets/google.png',
+                height: 18,
+              ),
               onPressed: () {
                 context.bloc<AuthCubit>().signInWithGoogle();
               },
-              color: Colors.lightBlue,
-              child: const Text(
-                'Iniciar sesión con Google',
+              color: Colors.white,
+              textColor: Colors.black,
+              label: const Text(
+                'Ingresar con Google',
                 style: TextStyle(
-                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),

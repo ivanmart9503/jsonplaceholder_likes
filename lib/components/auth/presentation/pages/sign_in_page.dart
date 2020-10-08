@@ -6,8 +6,9 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Json Place Holder Photos'),
-        centerTitle: true,
+        backgroundColor: Colors.grey[50],
+        elevation: 0,
+        brightness: Brightness.light,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -17,7 +18,7 @@ class SignInPage extends StatelessWidget {
             Text(
               '{JSON} Placeholder',
               style: TextStyle(
-                fontSize: 36,
+                fontSize: 34,
                 fontWeight: FontWeight.bold,
               ),
             ),

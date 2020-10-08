@@ -24,7 +24,7 @@ class PhotoLikes extends StatelessWidget {
             return Container();
           } else if (state is UpdatedLikes) {
             final int likes = state.likes.numberOfLikes;
-            final List<dynamic> usersId = state.likes.users;
+            final List<dynamic> usersId = state.likes.usersId;
             return Column(
               children: [
                 _likeDislikeIcon(context, usersId),
@@ -45,11 +45,22 @@ class PhotoLikes extends StatelessWidget {
   }
 
   Widget _likeDislikeIcon(BuildContext context, List<dynamic> usersId) {
-    final user = (context.bloc<AuthCubit>().state as Authenticated).user;
-    final like = usersId.contains(user.id);
+    final userId = (context.bloc<AuthCubit>().state as Authenticated).user.id;
+    final like = usersId.contains(userId);
     final icon = like ? Icons.favorite : Icons.favorite_border;
     final color = like ? Colors.red : Colors.black;
 
-    return Icon(icon, color: color, size: 28);
+    return GestureDetector(
+      onTap: () {
+        if (like) {
+          print('dislike');
+          context.bloc<LikesCubit>().dislikePhoto(_photo.id, userId);
+        } else {
+          print('like');
+          context.bloc<LikesCubit>().likePhoto(_photo.id, userId);
+        }
+      },
+      child: Icon(icon, color: color, size: 28),
+    );
   }
 }

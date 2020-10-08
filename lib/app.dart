@@ -1,5 +1,6 @@
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jsonplaceholder_likes/components/auth/presentation/cubit/auth_cubit.dart';
 import 'package:jsonplaceholder_likes/core/navigation/router.dart';
@@ -9,6 +10,12 @@ import 'package:sailor/sailor.dart';
 class JsonPlaceHolderApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+    );
+
     return BlocProvider<AuthCubit>(
       create: (_) => getIt<AuthCubit>(),
       child: BlocListener<AuthCubit, AuthState>(
@@ -34,6 +41,7 @@ class JsonPlaceHolderApp extends StatelessWidget {
         },
         child: MaterialApp(
           title: 'JsonPlaceHolder Photos',
+          theme: ThemeData(fontFamily: 'Overpass'),
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           onGenerateRoute: Router.sailor.generator(),
